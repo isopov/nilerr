@@ -163,13 +163,11 @@ func isReturnNil(b *ssa.BasicBlock) *ssa.Return {
 		return nil
 	}
 
-	errorReturnValues := 0
 	for _, res := range ret.Results {
 		if !types.Implements(res.Type(), errType) {
 			continue
 		}
 
-		errorReturnValues++
 		v, ok := res.(*ssa.Const)
 		if !ok {
 			return nil
@@ -178,10 +176,6 @@ func isReturnNil(b *ssa.BasicBlock) *ssa.Return {
 		if !v.IsNil() {
 			return nil
 		}
-	}
-
-	if errorReturnValues == 0 {
-		return nil
 	}
 
 	return ret

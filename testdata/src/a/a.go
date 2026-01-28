@@ -156,7 +156,7 @@ func j() (interface{}, error) {
 
 func k() {
 	if err := do(); err != nil {
-		return
+		return // want "error is not nil \\(line 158\\) but it returns nil"
 	}
 
 	if err := do(); err == nil {
@@ -185,6 +185,18 @@ func l() error {
 	}
 	if bErr != nil {
 		return nil // want `error is not nil \(lines \[172 175\]\) but it returns nil`
+	}
+
+	return nil
+}
+
+func m() any {
+	if err := do(); err != nil {
+		return nil // want "error is not nil \\(line 194\\) but it returns nil"
+	}
+
+	if err := do(); err == nil {
+		return nil
 	}
 
 	return nil
