@@ -202,6 +202,23 @@ func m() any {
 	return nil
 }
 
+func o() error {
+	var resultErr error
+	doFunc(func() {
+		err := do()
+		if err != nil {
+			resultErr = err
+			return
+		}
+	})
+
+	return resultErr
+}
+
+func doFunc(f func()) {
+	f()
+}
+
 func do() error {
 	return nil
 }

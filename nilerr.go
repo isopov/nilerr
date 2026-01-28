@@ -216,6 +216,11 @@ func usesErrorValue(b *ssa.BasicBlock, errVal ssa.Value) bool {
 				}
 			}
 		}
+		if storeInstr, ok := instr.(*ssa.Store); ok {
+			if isUsedInValue(storeInstr.Val, errVal) {
+				return true
+			}
+		}
 	}
 	return false
 }
