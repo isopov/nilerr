@@ -201,6 +201,9 @@ func isReturnError(b *ssa.BasicBlock, errVal ssa.Value) *ssa.Return {
 }
 
 func usesErrorValue(b *ssa.BasicBlock, errVal ssa.Value) bool {
+	if _, ok := errVal.(*ssa.Parameter); ok {
+		return true
+	}
 	for _, instr := range b.Instrs {
 		if callInstr, ok := instr.(*ssa.Call); ok {
 			for _, arg := range callInstr.Call.Args {

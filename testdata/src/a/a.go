@@ -215,6 +215,20 @@ func o() error {
 	return resultErr
 }
 
+func p(err error) {
+	if err != nil {
+		return
+	}
+	//do something
+}
+
+func s(err error) string {
+	if err != nil {
+		return ""
+	}
+	return "successful result"
+}
+
 func doFunc(f func()) {
 	f()
 }
