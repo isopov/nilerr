@@ -229,6 +229,24 @@ func s(err error) string {
 	return "successful result"
 }
 
+type t struct {
+	err error
+}
+
+func (t t) valueFunc() {
+	if t.err != nil {
+		return
+	}
+	//do something
+}
+
+func (t *t) ptrFunc() {
+	if t.err != nil {
+		return
+	}
+	//do something
+}
+
 func doFunc(f func()) {
 	f()
 }
